@@ -40,6 +40,6 @@ $collection->updateOne(
     ]
 );
 
-// redirection vers la liste
+// Redirection vers la liste de base
 header('Location: app.php');
 exit;
