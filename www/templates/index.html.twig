@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+{% block title %}Liste des manuscrits{% endblock %}
+
+{% block content %}
+    <h1>Liste des manuscrits</h1>
+    <p><a href="create.php">➕ Ajouter un manuscrit</a></p>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Cote</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Auteur principal</th>
+            <th>Édition</th>
+            <th>Langue</th>
+            <th>Siècle</th>
+            <th>ObjectID</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for doc in list %}
+            <tr>
+                <td>{{ doc.cote|default('—') }}</td>
+                <td>{{ doc.titre|default('—') }}</td>
+                <td>{{ doc.auteur|default('—') }}</td>
+                <td>{{ doc.auteur_principal|default('—') }}</td>
+                <td>{{ doc.edition|default('—') }}</td>
+                <td>{{ doc.langue|default('—') }}</td>
+                <td>{{ doc.siecle|default('—') }}</td>
+                <td>{{ doc.objectid|default('—') }}</td>
+                <td>
+                    <a href="get.php?id={{ doc._id }}">Voir</a> |
+                    <a href="edit.php?id={{ doc._id }}">Éditer</a> |
+                    <a href="delete.php?id={{ doc._id }}" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="9">Aucun manuscrit trouvé.</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

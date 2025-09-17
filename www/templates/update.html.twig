@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block title %}Modifier un manuscrit{% endblock %}
+
+{% block content %}
+    <h1>Modifier le manuscrit</h1>
+
+    <form method="post" action="update.php">
+        <input type="hidden" name="id" value="{{ entity._id }}">
+
+        <label>Cote :
+            <input type="text" name="cote" value="{{ entity.cote|default('') }}">
+        </label><br>
+
+        <label>Titre :
+            <input type="text" name="title" value="{{ entity.titre|default('') }}" required>
+        </label><br>
+
+        <label>Auteur :
+            <input type="text" name="author" value="{{ entity.auteur|default('') }}">
+        </label><br>
+
+        <label>Auteur principal :
+            <input type="text" name="auteur_principal" value="{{ entity.auteur_principal|default('') }}">
+        </label><br>
+
+        <label>Édition :
+            <input type="text" name="edition" value="{{ entity.edition|default('') }}">
+        </label><br>
+
+        <label>Langue :
+            <input type="text" name="langue" value="{{ entity.langue|default('') }}">
+        </label><br>
+
+        <label>Siècle :
+            <input type="number" name="century" value="{{ entity.siecle|default('') }}">
+        </label><br>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+
+    <p><a href="app.php">⬅ Retour</a></p>
+{% endblock %}

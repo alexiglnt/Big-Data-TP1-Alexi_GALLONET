@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block title %}Détail du manuscrit{% endblock %}
+
+{% block content %}
+    <h1>{{ entity.titre|default('Sans titre') }}</h1>
+
+    <ul>
+        <li><strong>Cote :</strong> {{ entity.cote|default('—') }}</li>
+        <li><strong>Auteur :</strong> {{ entity.auteur|default('—') }}</li>
+        <li><strong>Auteur principal :</strong> {{ entity.auteur_principal|default('—') }}</li>
+        <li><strong>Édition :</strong> {{ entity.edition|default('—') }}</li>
+        <li><strong>Langue :</strong> {{ entity.langue|default('—') }}</li>
+        <li><strong>Siècle :</strong> {{ entity.siecle|default('—') }}</li>
+        <li><strong>ObjectID :</strong> {{ entity.objectid|default('—') }}</li>
+    </ul>
+
+    <p>
+        <a href="edit.php?id={{ entity._id }}">Éditer</a> |
+        <a href="delete.php?id={{ entity._id }}" onclick="return confirm('Supprimer ?');">Supprimer</a> |
+        <a href="app.php">⬅ Retour</a>
+    </p>
+{% endblock %}
