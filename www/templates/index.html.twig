@@ -3,6 +3,13 @@
 
 {% block content %}
     <h1>Liste des manuscrits</h1>
+
+    <form method="get" action="app.php" style="margin-bottom: 1rem;">
+        <input type="text" name="q" placeholder="Rechercher..."
+               value="{{ search|default('') }}">
+        <button type="submit">Rechercher</button>
+    </form>
+
     <p><a href="create.php">➕ Ajouter un manuscrit</a></p>
 
     <table border="1" cellpadding="5" cellspacing="0">
@@ -38,4 +45,25 @@
             <tr><td colspan="9">Aucun manuscrit trouvé.</td></tr>
         {% endfor %}
     </table>
+
+    {# --- PAGINATION --- #}
+    {% if totalPages is defined and totalPages > 1 %}
+        <nav style="margin-top: 1rem;">
+            {% if currentPage > 1 %}
+                <a href="app.php?page={{ currentPage - 1 }}{% if search %}&q={{ search|url_encode }}{% endif %}">« Précédent</a>
+            {% endif %}
+
+            {% for p in 1..totalPages %}
+                {% if p == currentPage %}
+                    <strong>[{{ p }}]</strong>
+                {% else %}
+                    <a href="app.php?page={{ p }}{% if search %}&q={{ search|url_encode }}{% endif %}">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if currentPage < totalPages %}
+                <a href="app.php?page={{ currentPage + 1 }}{% if search %}&q={{ search|url_encode }}{% endif %}">Suivant »</a>
+            {% endif %}
+        </nav>
+    {% endif %}
 {% endblock %}
